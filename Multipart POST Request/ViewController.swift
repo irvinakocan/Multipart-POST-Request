@@ -51,8 +51,11 @@ class ViewController: UIViewController {
                 return
             }
                 
-            if let response = response as? HTTPURLResponse {
-                print("Status code: \(response.statusCode)")
+            if let data = data {
+                guard let json = try? JSONSerialization.jsonObject(with: data) else {
+                    return
+                }
+                print(json)
             }
         })
         task.resume()
